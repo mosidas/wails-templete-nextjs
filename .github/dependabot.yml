@@ -1,11 +1,12 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+# 依存の更新 PR を Dependabot に作らせる設定。
+# 選択肢の一覧: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # フロントエンドの npm 依存(package.json は frontend/ にある)
+  - package-ecosystem: "npm"
+    directory: "/frontend"
     schedule:
       interval: "weekly"
+  # Go module は対象にしない。依存を宣言するファイルが go.tmpl.mod であり、
+  # Wails のテンプレート変数({{.WailsVersion}})を含むため Dependabot が解釈できない。
